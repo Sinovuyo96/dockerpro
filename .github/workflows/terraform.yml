@@ -24,10 +24,9 @@ jobs:
           aws configure set region us-east-1  # Replace with your desired AWS region
           aws s3 ls  # Example AWS CLI command
           
-      - name: containerize application and Push to ECR
+      - name: containerize application and Push to Dockerhub
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 385211315249.dkr.ecr.us-east-1.amazonaws.com
+          docker login
           docker build -t rendani-application .
-          docker tag rendani-application:latest 385211315249.dkr.ecr.us-east-1.amazonaws.com/rendani-application:latest
-          docker push 385211315249.dkr.ecr.us-east-1.amazonaws.com/rendani-application:latest
+          docker push sinovuyo/rendani-image
           docker image ls
